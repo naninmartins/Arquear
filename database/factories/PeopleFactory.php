@@ -14,7 +14,5 @@ $factory->define(App\Models\People\Person::class, function (Faker $faker) {
         'phone2'            =>  $faker->numberBetween(000000000000,999999999999),
         'male_female'       =>  $faker->randomElement(['f','m']),
         'active'            =>  $faker->boolean,
-        'register_date'     =>  $faker->date(),
-        'register_birthday' =>  $faker->date(),
     ];
 });

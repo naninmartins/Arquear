@@ -25,8 +25,6 @@ class CreatePeopleTable extends Migration
             $table->string('phone2',12);
             $table->string('male_female',1);
             $table->boolean('active');
-            $table->date('register_date');
-            $table->date('register_birthday');
             $table->timestamps();
         });
     }
