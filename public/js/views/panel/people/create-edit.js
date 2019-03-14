@@ -1,1 +1,1 @@
-let People = new People();
+let person = new People("#cnpjCpf", '.phone');
