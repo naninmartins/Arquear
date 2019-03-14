@@ -123,16 +123,20 @@
 @stop
 
 @section('js')
-
+<script src="/js/utilities/ValidateCPF.js"></script>
+{{-- <script src="/js/views/panel/people/People.js"></script>
+<script src="/js/views/panel/people/create-edit.js"></script> --}}
 <script>
 
-{{-- Mask Functions to CPF/CNPJ and Phone numbers --}}
+/* Mask Functions to CPF/CNPJ and Phone numbers */
 
 $( "#cnpjCpf" ).blur( e=>{
         let tam = $(e.target).val().length;
         let type = $(e.target).val()[3]
         if (tam == 11 || tam == 14 && type =='.' ) {
-            console.log(ValidateCPF($(e.target).val()));
+
+            (!ValidateCPF($(e.target).val())) ? putError($(e.target)[0],'CPF inválido!') : removeError($(e.target)[0]);
+
             $(e.target).mask("999.999.999-99");
             $('.juridico').addClass("hidden");
         }
@@ -154,84 +158,19 @@ $(".phone").select( e=>{
     $(e.target).unmask();
 });
 
-{{--  --}}
-
-
-/*
-|--------------------------------------------------------------------------
-| Validate CPF
-|--------------------------------------------------------------------------
-| This is a JavaScript fucntion that return true if a CPF is valid,
-| the entry is purely a stringthe algorithm was updated to fit my
-| needed and your logic can be found on the links:
-| https://www.devmedia.com.br/validar-cpf-com-javascript/23916 last access on: 2018/03/13
-| https://medium.com/@osuissa/javascript-validacao-de-cpf-passo-a-passo-9428ee32c104 last access on: 2018/03/13
-*/
-function ValidateCPF(strCPF) {
-
-    var Sum;
-    var Mod;
-    Sum = 0;
-
-  if (equalCPF(strCPF)) {
-    return false;
-  }
-
-  for (i=1; i<=9; i++) {
-    Sum += parseInt(strCPF.substring(i-1, i)) * (11 - i);
-  }
-  Mod = (Sum * 10) % 11;
-
-    if ((Mod == 10) || (Mod == 11))  {
-        Mod = 0;
-    }
-    if (Mod != parseInt(strCPF[9]) ) {
-        return false;
-    }
-
-  Sum = 0;
-    for (i = 1; i <= 10; i++) {
-        Sum += parseInt(strCPF.substring(i-1, i)) * (12 - i);
-    }
-    Mod = (Sum * 10) % 11;
-
-    if ((Mod == 10) || (Mod == 11)){
-        Mod = 0;
-    }
-    if (Mod != parseInt(strCPF[10] ) ) {
-        return false;
-    }
-    return true;
+function putError (element, text = '') {
+    let div = element.parentElement;
+    div.classList.add("has-error");
+    div.querySelector('div > span').innerHTML = text;
 }
 
-function equalCPF (strCPF) {
-    let equal = false;
-
-    for (i=0; i<=9; i++) {
-
-        let index = i.toString();
-        let str = index;
-
-        for (j=0; j<=9; j++) {
-           str += index;
-        }
-
-        if (strCPF == str) {
-            equal = true;
-            break;
-        }
-    }
-    return equal;
+function removeError (element) {
+    let div = element.parentElement;
+    div.classList.remove("has-error");
+    div.querySelector('div > span').innerHTML = '';
 }
 
-/*
-|--------------------------------------------------------------------------
-| Validate CPF
-|--------------------------------------------------------------------------
-| This functions return true if a CPF is valid, the entry is purely a string
-|  the algorithm was updated to fit my needed and your logic can be found on the link:
-|  https://www.devmedia.com.br/validar-cpf-com-javascript/23916 last access on: 2018/03/13
-*/
+
 
 
 </script>

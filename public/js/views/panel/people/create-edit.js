@@ -1,0 +1,1 @@
+let People = new People();
