@@ -96,14 +96,43 @@
                     </h4>
                     <hr>
                     <div class="row">
-                        <div class="col-md-8">
-                            {!!Form::label('l_name', 'Nome:*', ['class'=> ' control-label'])!!}
-                            {!!Form::text('name', null, ['class'=>'form-control valid','style'=>'text-transform:uppercase','id'=>'name'])!!}
+                        <div class="col-md-2">
+                            {!!Form::label('l_postalCode', 'CEP:*', ['class'=> ' control-label'])!!}
+                            {!!Form::text('postalCode', null, ['class'=>'form-control valid','style'=>'text-transform:uppercase','id'=>'postalCode', 'maxlength'=>'8'])!!}
                             <span class="material-input"></span>
                         </div>
-                        <div class="col-md-3">
-                            {!!Form::label('l_cpf_cnpj', 'CPF / CNPJ:*', ['class'=> ' control-label'])!!}
-                            {!!Form::text('cpf_cnpj', null, ['class'=>'form-control valid','style'=>'text-transform:uppercase','id'=>'cnpjCpf', 'maxlength'=>'14'])!!}
+                        <div class="col-md-8">
+                            {!!Form::label('l_street', 'Rua / Avenida:*', ['class'=> ' control-label'])!!}
+                            {!!Form::text('street', null, ['class'=>'form-control valid','style'=>'text-transform:uppercase','id'=>'street'])!!}
+                            <span class="material-input"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                            <div class="col-md-5">
+                                {!!Form::label('l_city', 'Cidade:*', ['class'=> ' control-label'])!!}
+                                {!!Form::text('city', null, ['class'=>'form-control ','style'=>'text-transform:uppercase','id'=>'city','disabled'])!!}
+                                <span class="material-input"></span>
+                            </div>
+                            <div class="col-md-5">
+                                {!!Form::label('l_state', 'Estado:*', ['class'=> ' control-label'])!!}
+                                {!!Form::text('state', null, ['class'=>'form-control valid','style'=>'text-transform:uppercase','id'=>'state','disabled'])!!}
+                                <span class="material-input"></span>
+                            </div>
+                        </div>
+                    <div class="row">
+                            <div class="col-md-4">
+                                {!!Form::label('l_complement', 'Complemento:', ['class'=> ' control-label'])!!}
+                                {!!Form::text('complement', null, ['class'=>'form-control valid','style'=>'text-transform:uppercase','id'=>'complement'])!!}
+                                <span class="material-input"></span>
+                            </div>
+                        <div class="col-md-4">
+                            {!!Form::label('l_neighborhood', 'Bairro:*', ['class'=> ' control-label'])!!}
+                            {!!Form::text('neighborhood', null, ['class'=>'form-control valid','style'=>'text-transform:uppercase','id'=>'neighborhood'])!!}
+                            <span class="material-input"></span>
+                        </div>
+                        <div class="col-md-2">
+                            {!!Form::label('l_number', 'N°:*', ['class'=> ' control-label'])!!}
+                            {!!Form::text('number', null, ['class'=>'form-control valid','style'=>'text-transform:uppercase','id'=>'number'])!!}
                             <span class="material-input"></span>
                         </div>
                     </div>
@@ -123,7 +152,6 @@
 @stop
 
 @section('js')
-<script src="/js/utilities/usefuls.js"></script>
 <script src="/js/views/panel/people/People.js"></script>
 <script src="/js/views/panel/people/create-edit.js"></script>
 @stop

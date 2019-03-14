@@ -34,4 +34,49 @@ class People {
             $(e.target).unmask();
         });
     }
+
+    // function to fill adresses, send array names of inputs of form
+    fillAdress (postalCode,city,state,complement,neighborhood) {
+        let el_postalCode = document.getElementById(postalCode);
+        this._useful.setMask('99999-999',el_postalCode);
+
+        el_postalCode.addEventListener('blur',() => {
+            if (!el_postalCode.value) this._useful.putError(el_postalCode,'Preencha o CEP primeiro!');
+            else {
+                let url = `http://viacep.com.br/ws/${el_postalCode.value}/json/`;
+                this.getAxios(url).then(response=>{
+
+                    if(response.data.erro) {
+                        this._useful.putError(el_postalCode,'CEP não encontrado!');
+                    }
+                    else {
+                        this._useful.removeError(el_postalCode);
+                        document.getElementById(city).value = response.data.localidade;
+                        document.getElementById(state).value = response.data.uf;
+                        document.getElementById(complement).value = response.data.complemento;
+                        document.getElementById(neighborhood).value = response.data.bairro;
+                    }
+                }).catch( () =>{
+                    this._useful.putError(el_postalCode,'CEP inválido!');
+                });
+            }
+        });
+    }
+
+
+    async getAxios(url) {
+        try {
+            const response = await axios.get(url);
+            return response;
+        } catch (error) {
+            console.log(error);
+            return error;
+        }
+    }//'http://viacep.com.br/ws/39592000/json/'
+
+
+
+
+
+
 }

@@ -62,8 +62,14 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
 @endif
 
+<!-- Axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
 <!-- Jquery mask Plugin -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+
+<!-- My own "class" to usefuls -->
+    <script src="/js/utilities/usefuls.js"></script>
 
 @yield('adminlte_js')
 

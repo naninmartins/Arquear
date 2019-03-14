@@ -126,6 +126,22 @@ class Usefuls  {
         });
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | Set a generic mask to a input
+    |--------------------------------------------------------------------------
+    | Needed use Jquery mask plugin
+    */
+   setMask (mask,input) {
+    $(input).blur(e=>{
+        ($(e.target).val().length == 10) ? $(e.target).mask(mask) : $(e.target).mask(mask);
+    });
+
+    $(input).select( e=>{
+        $(e.target).unmask();
+    });
+}
+
 
 }
 
