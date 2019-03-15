@@ -50,19 +50,22 @@ class People {
                 this.getAxios(url).then(response=>{
 
                     if(response.data.erro) {
+                        //if object response return attr erro true the postal code did not found
                         this._useful.setError(el_postalCode,'CEP não encontrado!');
                         this._useful.clearInputs('formAdresses');
                     }
                     else {
                         this._useful.removeError(el_postalCode);
+                        //fill each input with value from sync await response
                         document.getElementById(city).value = response.data.localidade;
                         document.getElementById(state).value = response.data.uf;
                         document.getElementById(complement).value = response.data.complemento;
                         document.getElementById(neighborhood).value = response.data.bairro;
-                        //document.querySelector('#street').setAttribute('disabled','false');
+
                         document.querySelector('#street').classList.remove('hidden');
                     }
                 }).catch( () =>{
+                    //some else error code such as 404 code tell us that postal code isn't valid
                     this._useful.setError(el_postalCode,'CEP inválido!');
                     this._useful.clearInputs('.formAdresses');
                 });
@@ -81,7 +84,7 @@ class People {
             console.log(error);
             return error;
         }
-    }//'http://viacep.com.br/ws/39592000/json/'
+    }//'http://viacep.com.br/ws/39592000/json/'  link get api
 
     validateForm () {
         //console.log(this._form);
