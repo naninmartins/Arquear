@@ -40,7 +40,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             {!!Form::label('l_name', 'Nome:*', ['class'=> ' control-label'])!!}
-                            {!!Form::text('name', null, ['class'=>'form-control valid','style'=>'text-transform:uppercase','id'=>'name'])!!}
+                            {!!Form::text('name', null, ['class'=>'form-control valid usefulRequired','style'=>'text-transform:uppercase','id'=>'name'])!!}
                             <span class="material-input"></span>
                         </div>
                         <div class="col-md-4">
@@ -52,12 +52,12 @@
                     <div class="row">
                         <div class="col-md-6">
                             {!!Form::label('l_email', 'E-mail:*', ['class'=> ' control-label'])!!}
-                            {!!Form::text('email', null, ['class'=>'form-control valid','style'=>'text-transform:uppercase','id'=>'email'])!!}
+                            {!!Form::text('email', null, ['class'=>'form-control valid usefulRequired','style'=>'text-transform:uppercase','id'=>'email'])!!}
                             <span class="material-input"></span>
                         </div>
                         <div class="col-md-4">
                             {!!Form::label('l_cpf_cnpj', 'CPF / CNPJ:*', ['class'=> ' control-label'])!!}
-                            {!!Form::text('cpf_cnpj', null, ['class'=>'form-control valid','style'=>'text-transform:uppercase','id'=>'cnpjCpf', 'maxlength'=>'14'])!!}
+                            {!!Form::text('cpf_cnpj', null, ['class'=>'form-control valid usefulRequired','style'=>'text-transform:uppercase','id'=>'cnpjCpf', 'maxlength'=>'14'])!!}
                             <span class="material-input"></span>
                         </div>
                     </div>
@@ -76,7 +76,7 @@
                     <div class="row">
                         <div class="col-md-5">
                             {!!Form::label('l_phone1', 'Telefone Principal:*', ['class'=> ' control-label'])!!}
-                            {!!Form::text('phone1', null, ['class'=>'form-control phone','placeholder'=>'(00) x0000-0000','id'=>'phone1'])!!}
+                            {!!Form::text('phone1', null, ['class'=>'form-control phone usefulRequired','placeholder'=>'(00) x0000-0000','id'=>'phone1'])!!}
                             <span class="material-input"></span>
                         </div>
                         <div class="col-md-5">
@@ -89,7 +89,7 @@
                 </div>
             </div>
             <div class="box-body">
-                <div class="form-body">
+                <div class="form-body formAdresses">
                     <h4 class="box-title">
                         <i class="material-icons">layers</i>
                             Endereço
@@ -98,41 +98,41 @@
                     <div class="row">
                         <div class="col-md-2">
                             {!!Form::label('l_postalCode', 'CEP:*', ['class'=> ' control-label'])!!}
-                            {!!Form::text('postalCode', null, ['class'=>'form-control valid','style'=>'text-transform:uppercase','id'=>'postalCode', 'maxlength'=>'8'])!!}
+                            {!!Form::text('postalCode', null, ['class'=>'form-control valid usefulRequired','style'=>'text-transform:uppercase','id'=>'postalCode', 'maxlength'=>'8'])!!}
                             <span class="material-input"></span>
                         </div>
                         <div class="col-md-8">
                             {!!Form::label('l_street', 'Rua / Avenida:*', ['class'=> ' control-label'])!!}
-                            {!!Form::text('street', null, ['class'=>'form-control valid','style'=>'text-transform:uppercase','id'=>'street'])!!}
+                            {!!Form::text('street', null, ['class'=>'form-control valid usefulRequired','style'=>'text-transform:uppercase','id'=>'street'])!!}
                             <span class="material-input"></span>
                         </div>
                     </div>
                     <div class="row">
                             <div class="col-md-5">
                                 {!!Form::label('l_city', 'Cidade:*', ['class'=> ' control-label'])!!}
-                                {!!Form::text('city', null, ['class'=>'form-control ','style'=>'text-transform:uppercase','id'=>'city','disabled'])!!}
+                                {!!Form::text('city', null, ['class'=>'form-control usefulRequired','style'=>'text-transform:uppercase','id'=>'city','disabled'])!!}
                                 <span class="material-input"></span>
                             </div>
                             <div class="col-md-5">
                                 {!!Form::label('l_state', 'Estado:*', ['class'=> ' control-label'])!!}
-                                {!!Form::text('state', null, ['class'=>'form-control valid','style'=>'text-transform:uppercase','id'=>'state','disabled'])!!}
+                                {!!Form::text('state', null, ['class'=>'form-control valid usefulRequired','style'=>'text-transform:uppercase','id'=>'state','disabled'])!!}
                                 <span class="material-input"></span>
                             </div>
                         </div>
                     <div class="row">
-                            <div class="col-md-4">
-                                {!!Form::label('l_complement', 'Complemento:', ['class'=> ' control-label'])!!}
-                                {!!Form::text('complement', null, ['class'=>'form-control valid','style'=>'text-transform:uppercase','id'=>'complement'])!!}
-                                <span class="material-input"></span>
-                            </div>
                         <div class="col-md-4">
                             {!!Form::label('l_neighborhood', 'Bairro:*', ['class'=> ' control-label'])!!}
-                            {!!Form::text('neighborhood', null, ['class'=>'form-control valid','style'=>'text-transform:uppercase','id'=>'neighborhood'])!!}
+                            {!!Form::text('neighborhood', null, ['class'=>'form-control valid usefulRequired','style'=>'text-transform:uppercase','id'=>'neighborhood'])!!}
                             <span class="material-input"></span>
                         </div>
                         <div class="col-md-2">
-                            {!!Form::label('l_number', 'N°:*', ['class'=> ' control-label'])!!}
+                            {!!Form::label('l_number', 'N°:', ['class'=> ' control-label'])!!}
                             {!!Form::text('number', null, ['class'=>'form-control valid','style'=>'text-transform:uppercase','id'=>'number'])!!}
+                            <span class="material-input"></span>
+                        </div>
+                        <div class="col-md-4">
+                            {!!Form::label('l_complement', 'Complemento:', ['class'=> ' control-label'])!!}
+                            {!!Form::text('complement', null, ['class'=>'form-control valid','style'=>'text-transform:uppercase','id'=>'complement'])!!}
                             <span class="material-input"></span>
                         </div>
                     </div>
@@ -140,18 +140,19 @@
             </div>
         </div>
 
-            <div class="box-footer">
-                <div id="actions" class="col-md-offset-10">
-                    <button type="submit" class="btn btn-success"><b>Salvar</b></button>
-                    <a href="/produto/index" class="btn btn-danger"><b>Cancelar</b></a>
-                    <div class="clearfix"></div>
-                </div>
+        <div class="box-footer">
+            <div id="actions" class="col-md-offset-10">
+                <button type="submit" class="btn btn-success"><b>Salvar</b></button>
+                <a href="/produto/index" class="btn btn-danger"><b>Cancelar</b></a>
+                <div class="clearfix"></div>
             </div>
         </div>
     </div>
+    {!! Form::close() !!}
 @stop
 
 @section('js')
+<script src="//cdn.jsdelivr.net/npm/bluebird@3.5.3/js/browser/bluebird.js"></script>
 <script src="/js/views/panel/people/People.js"></script>
 <script src="/js/views/panel/people/create-edit.js"></script>
 @stop

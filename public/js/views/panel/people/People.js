@@ -1,25 +1,27 @@
 class People {
 
-    constructor (inputCpfCnpj,inputPhone) {
+    constructor (inputCpfCnpj,inputPhone,form) {
         this._inputCpfCnpj =  $(inputCpfCnpj);
         this._useful = new Usefuls();
+        this._form = document.querySelector(form);
+
         this.initialize (inputPhone);
     }
 
     initialize (inputPhone) {
         this.cpfCnpjValidation();
         this._useful.phoneMask(inputPhone);
+        this.validateForm();
     }
 
     cpfCnpjValidation () {
-
         this._inputCpfCnpj.blur( e=>{
             let tam = $(e.target).val().length;
             let type = $(e.target).val()[3]
             //if tam 11 or 14 but in your 3 position haven't a "." is a CPF number
             if (tam == 11 || tam == 14 && type =='.' ) {
                 //If CPF isn't valid set a Error on input
-                (!this._useful.validateCPF($(e.target).val())) ? this._useful.putError($(e.target)[0],'CPF inválido!') : this._useful.removeError($(e.target)[0]);
+                (!this._useful.validateCPF($(e.target).val())) ? this._useful.setError($(e.target)[0],'CPF inválido!') : this._useful.removeError($(e.target)[0]);
                 $(e.target).mask("999.999.999-99");
                 $('.juridico').addClass("hidden");
             }
@@ -41,13 +43,15 @@ class People {
         this._useful.setMask('99999-999',el_postalCode);
 
         el_postalCode.addEventListener('blur',() => {
-            if (!el_postalCode.value) this._useful.putError(el_postalCode,'Preencha o CEP primeiro!');
+            if (!el_postalCode.value) this._useful.setError(el_postalCode,'Preencha o CEP primeiro!');
             else {
                 let url = `http://viacep.com.br/ws/${el_postalCode.value}/json/`;
+
                 this.getAxios(url).then(response=>{
 
                     if(response.data.erro) {
-                        this._useful.putError(el_postalCode,'CEP não encontrado!');
+                        this._useful.setError(el_postalCode,'CEP não encontrado!');
+                        this._useful.clearInputs('formAdresses');
                     }
                     else {
                         this._useful.removeError(el_postalCode);
@@ -55,18 +59,23 @@ class People {
                         document.getElementById(state).value = response.data.uf;
                         document.getElementById(complement).value = response.data.complemento;
                         document.getElementById(neighborhood).value = response.data.bairro;
+                        //document.querySelector('#street').setAttribute('disabled','false');
+                        document.querySelector('#street').classList.remove('hidden');
                     }
                 }).catch( () =>{
-                    this._useful.putError(el_postalCode,'CEP inválido!');
+                    this._useful.setError(el_postalCode,'CEP inválido!');
+                    this._useful.clearInputs('.formAdresses');
                 });
+                //document.querySelector('#street').setAttribute('disabled','true');
+                document.querySelector('#street').classList.add('hidden');
             }
         });
     }
 
-
     async getAxios(url) {
         try {
             const response = await axios.get(url);
+            console.log(response)
             return response;
         } catch (error) {
             console.log(error);
@@ -74,9 +83,11 @@ class People {
         }
     }//'http://viacep.com.br/ws/39592000/json/'
 
-
-
-
-
-
+    validateForm () {
+        //console.log(this._form);
+        this._form.addEventListener('submit', e=>{
+            e.preventDefault();
+            (this._useful.validateInputs('.form')) ? e.submit() : false;
+        });
+    }
 }

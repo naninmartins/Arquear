@@ -91,6 +91,27 @@ class Usefuls  {
         return equal;
     }
 
+    cpfCnpjMask (inputCpfCnpj) {
+        inputCpfCnpj.blur( e=>{
+            let tam = $(e.target).val().length;
+            let type = $(e.target).val()[3]
+            //if tam 11 or 14 but in your 3 position haven't a "." is a CPF number
+            if (tam == 11 || tam == 14 && type =='.' ) {
+                //If CPF isn't valid set a Error on input
+                (!this._useful.validateCPF($(e.target).val())) ? this._useful.setError($(e.target)[0],'CPF inválido!') : this._useful.removeError($(e.target)[0]);
+                $(e.target).mask("999.999.999-99");
+            }
+            //if tam 14 or 18 but in your 3 position have a "." is a CNPJ number
+            if ( tam == 14 && type !='.' || tam == 18 ) {
+                $(e.target).mask("99.999.999/9999-99");
+            }
+        });
+        //reset mask each time that is selected
+        inputCpfCnpj.select( e=>{
+            $(e.target).unmask();
+        });
+    }
+
     /*
     |--------------------------------------------------------------------------
     | Put and Remove Error AdminLte
@@ -98,7 +119,7 @@ class Usefuls  {
     | Put and Remove error a input element in template AdminLte,
     | the element must have a span parent to use message
     */
-    putError (element, text = '') {
+    setError (element, text = '') {
         let div = element.parentElement;
         div.classList.add("has-error");
         div.querySelector('div > span').innerHTML = text;
@@ -132,16 +153,51 @@ class Usefuls  {
     |--------------------------------------------------------------------------
     | Needed use Jquery mask plugin
     */
-   setMask (mask,input) {
-    $(input).blur(e=>{
-        ($(e.target).val().length == 10) ? $(e.target).mask(mask) : $(e.target).mask(mask);
-    });
+    setMask (mask,input) {
+        $(input).blur(e=>{
+            ($(e.target).val().length == 10) ? $(e.target).mask(mask) : $(e.target).mask(mask);
+        });
 
-    $(input).select( e=>{
-        $(e.target).unmask();
-    });
-}
+        $(input).select( e=>{
+            $(e.target).unmask();
+        });
+    }
 
+     /*
+    |--------------------------------------------------------------------------
+    | Set value '' to some inputs
+    |--------------------------------------------------------------------------
+    | This function set a empty value for a set of inputs, It's needed put a
+    | class/id selector in a div upper of inputs
+    */
+    clearInputs(inputs) {
+        let el = document.querySelectorAll(`${inputs} input`); // look : https://stackoverflow.com/questions/11320631/what-s-the-difference-between-the-css-selectors-div-p-and-div-p
+        el.forEach(element => {
+            element.value = '';
+        });
+   }
+
+   validateInputs(inputs) {
+        let el = document.querySelectorAll(`${inputs} .usefulRequired`); // look : https://stackoverflow.com/questions/11320631/what-s-the-difference-between-the-css-selectors-div-p-and-div-p
+        let error = [];
+            el.forEach(element => {
+                //here we have 4 main types to input: select, text, number an checkbox, and we need to treat selected and
+               error.push(this.validate(element));
+            });
+        return (error.indexOf(true) > -1 ? false : true);
+   }
+
+   validate(element) {
+        let error = false;
+        if(!element.value) {
+            this.setError(element,'Campo obrigatório!');
+            error = true;
+        }
+        else {
+            this.removeError(element);
+        }
+        return error;
+    }
 
 }
 
