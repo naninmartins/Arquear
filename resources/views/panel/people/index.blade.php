@@ -43,15 +43,15 @@
             <tr>
                 <td>{{ $person->name }}</td>
                 <td>
-                    @if (isset($person->cpf)) {{ $person->cpf }} @else {{ $person->cpf }} @endif
+                    @if (isset($person->cpf)) {{ $person->cpf }} @else {{ $person->cnpj }} @endif
                 </td>
                 <td>{{ $person->email }}</td>
                 <td>{{ $person->phone1 }}</td>
                 <td>
-                    <a href="{{'url'('people', $person->id,'edit')}}" class="btn btn-success" data-toggle="" data-placement="top" title ="Editar Produto">
+                    <a href="{{'route'('people.edit',['get'=>$person->id])}}" class="btn btn-success" data-toggle="" data-placement="top" title ="Editar Produto">
                         <i class="fa fa-fw fa-pencil"></i>
                     </a>
-                    <a href="#" id="{{$person->id}}" class="btn btn-danger" data-toggle="modal" data-placement="top" title ="Apagar Produto" data-target="#modalConfirmDelete">
+                    <a href="#" id="{{ $person->id}}" class="btn btn-danger" data-toggle="modal" data-placement="top" title ="Apagar Produto" data-target="#modalConfirmDelete">
                         <i class="fa fa-fw fa-close"></i>
                         {{ Form::open(['action'=>['People\PersonController@destroy', $person->id],'class'=>'hidden','method'=>'delete', 'id'=>'modalConfirmDelete'.$person->id ]) }}
                         {{ Form::close() }}

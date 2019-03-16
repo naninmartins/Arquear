@@ -22,19 +22,18 @@ class People {
             if (tam == 11 || tam == 14 && type =='.' ) {
                 //If CPF isn't valid set a Error on input
                 (!this._useful.validateCPF($(e.target).val())) ? this._useful.setError($(e.target)[0],'CPF inválido!') : this._useful.removeError($(e.target)[0]);
-                $(e.target).mask("999.999.999-99").attr('name','cpf');
-                //$(e.target).val($(e.target).cleanVal());
                 $('.juridico').addClass("hidden");
+                $(e.target).mask('999.999.999-99');
             }
             //if tam 14 or 18 but in your 3 position have a "." is a CNPJ number
             if ( tam == 14 && type !='.' || tam == 18 ) {
-                $(e.target).mask("99.999.999/9999-99").attr('name','cnpj');
                 $('.juridico').removeClass("hidden");
+                $(e.target).mask('99.999.999/9999-99');
             }
         });
         //reset mask each time that is selected
         this._inputCpfCnpj.select( e=>{
-            $(e.target).unmask().attr('name','cpf_cnpj');
+            $(e.target).unmask();
         });
     }
 

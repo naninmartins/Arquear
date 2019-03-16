@@ -98,41 +98,41 @@
                     <div class="row">
                         <div class="col-md-2">
                             {!!Form::label('l_postalCode', 'CEP:*', ['class'=> ' control-label'])!!}
-                            {!!Form::text('postalCode', null, ['class'=>'form-control valid usefulRequired','style'=>'text-transform:uppercase','id'=>'postalCode', 'maxlength'=>'9'])!!}
+                            {!!Form::text('postal_code', (isset($person->adress->postal_code)) ? $person->adress->postal_code : null , ['class'=>'form-control valid usefulRequired','style'=>'text-transform:uppercase','id'=>'postalCode', 'maxlength'=>'9'])!!}
                             <span class="material-input"></span>
                         </div>
                         <div class="col-md-8">
                             {!!Form::label('l_street', 'Rua / Avenida:*', ['class'=> ' control-label'])!!}
-                            {!!Form::text('street', null, ['class'=>'form-control valid usefulRequired','style'=>'text-transform:uppercase','id'=>'street'])!!}
+                            {!!Form::text('street', (isset($person->adress->street)) ? $person->adress->street : null , ['class'=>'form-control valid usefulRequired','style'=>'text-transform:uppercase','id'=>'street'])!!}
                             <span class="material-input"></span>
                         </div>
                     </div>
                     <div class="row">
                             <div class="col-md-5">
                                 {!!Form::label('l_city', 'Cidade:*', ['class'=> ' control-label'])!!}
-                                {!!Form::text('city', null, ['class'=>'form-control usefulRequired','style'=>'text-transform:uppercase','id'=>'city','disabled'])!!}
+                                {!!Form::text('city', (isset($person->adress->city)) ? $person->adress->city : null , ['class'=>'form-control usefulRequired','style'=>'text-transform:uppercase','id'=>'city','readonly'])!!}
                                 <span class="material-input"></span>
                             </div>
                             <div class="col-md-5">
                                 {!!Form::label('l_state', 'Estado:*', ['class'=> ' control-label'])!!}
-                                {!!Form::text('state', null, ['class'=>'form-control valid usefulRequired','style'=>'text-transform:uppercase','id'=>'state','disabled'])!!}
+                                {!!Form::text('state', (isset($person->adress->state)) ? $person->adress->state : null , ['class'=>'form-control valid usefulRequired','style'=>'text-transform:uppercase','id'=>'state','readonly'])!!}
                                 <span class="material-input"></span>
                             </div>
                         </div>
                     <div class="row">
                         <div class="col-md-4">
                             {!!Form::label('l_neighborhood', 'Bairro:*', ['class'=> ' control-label'])!!}
-                            {!!Form::text('neighborhood', null, ['class'=>'form-control valid usefulRequired','style'=>'text-transform:uppercase','id'=>'neighborhood'])!!}
+                            {!!Form::text('neighborhood', (isset($person->adress->neighborhood)) ? $person->adress->neighborhood : null , ['class'=>'form-control valid usefulRequired','style'=>'text-transform:uppercase','id'=>'neighborhood'])!!}
                             <span class="material-input"></span>
                         </div>
                         <div class="col-md-2">
                             {!!Form::label('l_number', 'N°:', ['class'=> ' control-label'])!!}
-                            {!!Form::text('number', null, ['class'=>'form-control valid','style'=>'text-transform:uppercase','id'=>'number'])!!}
+                            {!!Form::text('number', (isset($person->adress->number)) ? $person->adress->number : null , ['class'=>'form-control valid','style'=>'text-transform:uppercase','id'=>'number', 'maxlength'=>'9'])!!}
                             <span class="material-input"></span>
                         </div>
                         <div class="col-md-4">
                             {!!Form::label('l_complement', 'Complemento:', ['class'=> ' control-label'])!!}
-                            {!!Form::text('complement', null, ['class'=>'form-control valid','style'=>'text-transform:uppercase','id'=>'complement'])!!}
+                            {!!Form::text('complement', (isset($person->adress->complement)) ? $person->adress->complement : null , ['class'=>'form-control valid','style'=>'text-transform:uppercase','id'=>'complement'])!!}
                             <span class="material-input"></span>
                         </div>
                     </div>
@@ -152,7 +152,6 @@
 @stop
 
 @section('js')
-<script src="//cdn.jsdelivr.net/npm/bluebird@3.5.3/js/browser/bluebird.js"></script>
 <script src="/js/views/panel/people/People.js"></script>
 <script src="/js/views/panel/people/create-edit.js"></script>
 @stop

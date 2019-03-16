@@ -36,7 +36,7 @@ class PersonController extends Controller
      */
     public function create()
     {
-        return view('panel.people.create-edit');
+        return view('panel.people.create-edit',compact('person'));
     }
 
     /**
@@ -47,7 +47,8 @@ class PersonController extends Controller
      */
     public function store(Request $request)
     {
-        $this->person->create($request->all());
+        $dataForm = $this->person->updateCpfCnpj($request->all());
+        $this->person->create($dataForm)->adress()->create($dataForm);
         $people = $this->person->paginate(10);
         return redirect('people')->with(compact('people'))->with('msg','Cadastro Realizado!');
     }
@@ -72,7 +73,8 @@ class PersonController extends Controller
     public function edit($id)
     {
         $person = $this->person->find($id);
-        return redirect('create-edit');
+        ($person['cpf']) ? $person['cpf_cnpj'] = $person['cpf'] : $person['cpf_cnpj'] = $person['cnpj'];
+        return view('panel.people.create-edit',compact('person'));
     }
 
     /**
@@ -84,7 +86,15 @@ class PersonController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $dataForm = $this->person->updateCpfCnpj($request->except('_method','_token'));
+        $person = $this->person->find($id);
+        $person->update($dataForm); //dd($dataForm);
+        if (isset($dataForm['postal_code'])) {
+            isset($person->adress) ? $person->adress()->create($dataForm) : $person->adress()->update($dataForm);
+        }
+       dd(5);
+        $people = $this->person->paginate(10);
+        return redirect('people')->with(compact('people'))->with('msg','Edição Realizada!');
     }
 
     /**

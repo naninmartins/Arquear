@@ -11,12 +11,13 @@ class Adresses extends Model
         'number',
         'complement',
         'neighborhood',
+        'city',
         'state',
         'postal_code',
     ];
 
-    public function user()
+    public function person()
     {
-        return $this->belongsTo('App\Person');
+        return $this->hasOne('App\Models\People\Person');
     }
 }

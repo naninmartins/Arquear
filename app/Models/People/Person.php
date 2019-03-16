@@ -26,4 +26,24 @@ class Person extends Model
     {
         return $this->hasOne('App\User');
     }
+
+    public function adress()
+    {
+        return $this->hasOne('App\Models\Adresses');
+    }
+
+    public function updateCpfCnpj ($request)    {
+
+        if (strlen($request['cpf_cnpj']) == 14) {
+
+            $request['cpf'] = $request['cpf_cnpj'];
+            $request['cnpj'] = NULL;
+        }
+        else{
+            $request['cnpj'] = $request['cpf_cnpj'];
+            $request['cpf'] = NULL;
+        }
+        return $request;
+    }
+
 }
