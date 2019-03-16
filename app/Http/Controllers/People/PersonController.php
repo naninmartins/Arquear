@@ -47,7 +47,9 @@ class PersonController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->person->create($request->all());
+        $people = $this->person->paginate(10);
+        return redirect('people')->with(compact('people'))->with('msg','Cadastro Realizado!');
     }
 
     /**
@@ -58,7 +60,7 @@ class PersonController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -69,7 +71,8 @@ class PersonController extends Controller
      */
     public function edit($id)
     {
-        //
+        $person = $this->person->find($id);
+        return redirect('create-edit');
     }
 
     /**

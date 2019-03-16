@@ -14,9 +14,9 @@
 
 @section('content')
     @if(isset($person))
-        {!! Form::model($person, ['action'=>['Painel\Produto\ProdutoController@update', $person->id], 'class' => 'form', 'method' =>'PUT','id'=>'formList'])!!}
+        {!! Form::model($person, ['url'=>['/people', $person->id], 'class' => 'form', 'method' =>'PUT','id'=>'formList'])!!}
     @else
-        {!! Form::open(['url'=>'/produto/store', 'class' => 'form', 'method'=>'POST','id'=>'formList']) !!}
+        {!! Form::open(['url'=>'/people', 'class' => 'form', 'method'=>'POST','id'=>'formList']) !!}
     @endif
     <div class="box box-solid box-primary">
         <div class="box-header" style="color: #fff;background-color: #174a66;border-color: #174a66;">
@@ -40,19 +40,19 @@
                     <div class="row">
                         <div class="col-md-6">
                             {!!Form::label('l_name', 'Nome:*', ['class'=> ' control-label'])!!}
-                            {!!Form::text('name', null, ['class'=>'form-control valid usefulRequired','style'=>'text-transform:uppercase','id'=>'name'])!!}
+                            {!!Form::text('name', null, ['class'=>'form-control valid usefulRequired','style'=>'text-transform:uppercase','id'=>'name', 'maxlength'=>'255'])!!}
                             <span class="material-input"></span>
                         </div>
                         <div class="col-md-4">
                             {!!Form::label('l_active', 'Cadastro Ativo:', ['class'=> ' control-label'])!!}
-                            {!! Form::select('active', ['Ativo','Inativo'], 'Ativo', ['class'=>'form-control', 'id'=>'active']) !!}
+                            {!! Form::select('active', ['1' => 'Ativo', '0' => 'Inativo'], null, ['class'=>'form-control', 'id'=>'active']) !!}
                             <span class="material-input"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             {!!Form::label('l_email', 'E-mail:*', ['class'=> ' control-label'])!!}
-                            {!!Form::text('email', null, ['class'=>'form-control valid usefulRequired','style'=>'text-transform:uppercase','id'=>'email'])!!}
+                            {!!Form::email('email', null, ['class'=>'form-control valid usefulRequired','style'=>'text-transform:uppercase','id'=>'email', 'maxlength'=>'60'])!!}
                             <span class="material-input"></span>
                         </div>
                         <div class="col-md-4">
@@ -64,24 +64,24 @@
                     <div class="row juridico hidden">
                         <div class="col-md-5">
                             {!!Form::label('l_fantasy_name', 'Nome de Fantasia:', ['class'=> ' control-label'])!!}
-                            {!!Form::text('fantasy_name', null, ['class'=>'form-control valid','style'=>'text-transform:uppercase','id'=>'fantasy_name'])!!}
+                            {!!Form::text('fantasy_name', null, ['class'=>'form-control valid','style'=>'text-transform:uppercase','id'=>'fantasy_name', 'maxlength'=>'255'])!!}
                             <span class="material-input"></span>
                         </div>
                         <div class="col-md-5">
                             {!!Form::label('l_nome', 'Razão Social:', ['class'=> ' control-label'])!!}
-                            {!!Form::text('social_reason', null, ['class'=>'form-control valid','style'=>'text-transform:uppercase','id'=>'social_reason'])!!}
+                            {!!Form::text('social_reason', null, ['class'=>'form-control valid','style'=>'text-transform:uppercase','id'=>'social_reason', 'maxlength'=>'255'])!!}
                             <span class="material-input"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-5">
                             {!!Form::label('l_phone1', 'Telefone Principal:*', ['class'=> ' control-label'])!!}
-                            {!!Form::text('phone1', null, ['class'=>'form-control phone usefulRequired','placeholder'=>'(00) x0000-0000','id'=>'phone1'])!!}
+                            {!!Form::text('phone1', null, ['class'=>'form-control phone usefulRequired','placeholder'=>'(00) x0000-0000','id'=>'phone1', 'maxlength'=>'13'])!!}
                             <span class="material-input"></span>
                         </div>
                         <div class="col-md-5">
                             {!!Form::label('l_phone2', 'Telefone Secundário:', ['class'=> ' control-label'])!!}
-                            {!!Form::text('phone2', null, ['class'=>'form-control phone','placeholder'=>'(00) x0000-0000','id'=>'phone2'])!!}
+                            {!!Form::text('phone2', null, ['class'=>'form-control phone','placeholder'=>'(00) x0000-0000','id'=>'phone2', 'maxlength'=>'13'])!!}
                             <span class="material-input"></span>
                         </div>
 
@@ -98,7 +98,7 @@
                     <div class="row">
                         <div class="col-md-2">
                             {!!Form::label('l_postalCode', 'CEP:*', ['class'=> ' control-label'])!!}
-                            {!!Form::text('postalCode', null, ['class'=>'form-control valid usefulRequired','style'=>'text-transform:uppercase','id'=>'postalCode', 'maxlength'=>'8'])!!}
+                            {!!Form::text('postalCode', null, ['class'=>'form-control valid usefulRequired','style'=>'text-transform:uppercase','id'=>'postalCode', 'maxlength'=>'9'])!!}
                             <span class="material-input"></span>
                         </div>
                         <div class="col-md-8">
@@ -141,7 +141,7 @@
         </div>
 
         <div class="box-footer">
-            <div id="actions" class="col-md-offset-10">
+            <div id="actions" class="col-md-5 pull-right">
                 <button type="submit" class="btn btn-success"><b>Salvar</b></button>
                 <a href="/produto/index" class="btn btn-danger"><b>Cancelar</b></a>
                 <div class="clearfix"></div>

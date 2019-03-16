@@ -1,7 +1,6 @@
 @extends('adminlte::page')
 
 @section('content_header')
-
     <section class="content-header">
         <h1>
             Lista de Pessoas
@@ -11,6 +10,12 @@
             <li><a href="#">Pessoas</a></li>
         </ol>
         <hr style="widht:0; border-color:gray;">
+        @if (session('msg'))
+            <div class="alert alert-success">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <li>{{ session('msg') }}</li>
+            </div>
+        @endif
     </section>
     <span class="border border-primary">
         <div class="pull-right" style="margin-right:5%;">
@@ -19,7 +24,6 @@
             </a>
         </div>
     </span>
-
 @stop
 
 @section('content')
@@ -44,7 +48,7 @@
                 <td>{{ $person->email }}</td>
                 <td>{{ $person->phone1 }}</td>
                 <td>
-                    <a href="{{'url'('people/', $person->id)}}" class="btn btn-success" data-toggle="" data-placement="top" title ="Editar Produto">
+                    <a href="{{'url'('people', $person->id,'edit')}}" class="btn btn-success" data-toggle="" data-placement="top" title ="Editar Produto">
                         <i class="fa fa-fw fa-pencil"></i>
                     </a>
                     <a href="#" id="{{$person->id}}" class="btn btn-danger" data-toggle="modal" data-placement="top" title ="Apagar Produto" data-target="#modalConfirmDelete">

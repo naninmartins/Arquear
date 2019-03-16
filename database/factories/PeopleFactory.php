@@ -12,7 +12,6 @@ $factory->define(App\Models\People\Person::class, function (Faker $faker) {
         'email'             =>  $faker->email,
         'phone1'            =>  $faker->numberBetween(000000000000,999999999999),
         'phone2'            =>  $faker->numberBetween(000000000000,999999999999),
-        'male_female'       =>  $faker->randomElement(['f','m']),
         'active'            =>  $faker->boolean,
     ];
 });

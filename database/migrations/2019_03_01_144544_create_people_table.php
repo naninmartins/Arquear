@@ -16,14 +16,13 @@ class CreatePeopleTable extends Migration
         Schema::create('people', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->index();
-            $table->string('fantasy_name');
-            $table->string('social_reason');
-            $table->string('cpf',11);
-            $table->string('cnpj',14);
+            $table->string('fantasy_name')->nullable(true);
+            $table->string('social_reason')->nullable(true);
+            $table->string('cpf',14)->nullable(true);
+            $table->string('cnpj',18)->nullable(true);
             $table->string('email',60);
-            $table->string('phone1',12);
-            $table->string('phone2',12);
-            $table->string('male_female',1);
+            $table->string('phone1',15);
+            $table->string('phone2',15)->nullable(true);
             $table->boolean('active');
             $table->timestamps();
         });
