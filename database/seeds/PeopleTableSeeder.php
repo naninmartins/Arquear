@@ -13,5 +13,9 @@ class PeopleTableSeeder extends Seeder
     public function run()
     {
         factory(App\Models\People\Person::class, 10)->create();
+
+        factory(App\Models\People\Person::class, 10)->create()->each(function ($person) {
+            $person->adress()->save(factory(App\Models\Adresses::class)->make());
+        });
     }
 }

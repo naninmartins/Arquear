@@ -86,13 +86,16 @@ class PersonController extends Controller
      */
     public function update(Request $request, $id)
     {
+        /**
+         * When update or create a relationship I've noticed that create()
+         * needed act on a query Relationship in another hand
+         * the methods ->fill()->save() or ->update() act on a model instance
+         */
         $dataForm = $this->person->updateCpfCnpj($request->except('_method','_token'));
         $person = $this->person->find($id);
-        $person->update($dataForm); //dd($dataForm);
-        if (isset($dataForm['postal_code'])) {
-            isset($person->adress) ? $person->adress()->create($dataForm) : $person->adress()->update($dataForm);
-        }
-       dd(5);
+        $person->update($dataForm);
+        //If there isn't a adress, must be created, else just
+        (isset($person->adress)) ? $person->adress->update($dataForm) : $person->adress()->create($dataForm);
         $people = $this->person->paginate(10);
         return redirect('people')->with(compact('people'))->with('msg','Edição Realizada!');
     }

@@ -18,7 +18,7 @@ class CreateAdressesTable extends Migration
             $table->string('street',60)->index();
             $table->string('number',10)->nullable(true);
             $table->string('complement',100)->nullable(true);
-            $table->string('postal_code',9);
+            $table->string('postal_code',10);
             $table->string('neighborhood',14);
             $table->string('city');
             $table->string('state');

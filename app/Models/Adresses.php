@@ -18,6 +18,6 @@ class Adresses extends Model
 
     public function person()
     {
-        return $this->hasOne('App\Models\People\Person');
+        return $this->belongsTo('App\Models\People\Person');
     }
 }

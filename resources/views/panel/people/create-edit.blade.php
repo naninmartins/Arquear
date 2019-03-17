@@ -143,7 +143,7 @@
         <div class="box-footer">
             <div id="actions" class="col-md-5 pull-right">
                 <button type="submit" class="btn btn-success"><b>Salvar</b></button>
-                <a href="/produto/index" class="btn btn-danger"><b>Cancelar</b></a>
+                <a href="/people" class="btn btn-danger"><b>Cancelar</b></a>
                 <div class="clearfix"></div>
             </div>
         </div>
