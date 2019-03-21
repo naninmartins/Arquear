@@ -25,6 +25,7 @@ Route::group(['middleware' => 'auth'], function()
 {
     Route::resources([
         'people' => 'People\PersonController',
+        'buildings' => 'Buildings\BuildingController',
     ]);
 
 });

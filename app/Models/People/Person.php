@@ -32,6 +32,11 @@ class Person extends Model
         return $this->hasOne('App\Models\Adresses');
     }
 
+    public function buildings()
+    {
+        return $this->hasMany('App\Models\Buildings\Building');
+    }
+
     public function updateCpfCnpj ($request)    {
 
         if (strlen($request['cpf_cnpj']) == 14) {

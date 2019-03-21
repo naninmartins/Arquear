@@ -124,6 +124,11 @@ return [
             //'label'       => 4,
             //'label_color' => 'success',
         ],
+        'Construções',[
+            'text'        => 'Construções',
+            'url'         => 'buildings',
+            'icon'        => 'building',
+        ],
         'CONFIGURAÇÕES DE CONTA',
         [
             'text' => 'Perfil',

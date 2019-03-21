@@ -20,4 +20,9 @@ class Adresses extends Model
     {
         return $this->belongsTo('App\Models\People\Person');
     }
+
+    public function building()
+    {
+        return $this->belongsTo('App\Models\Buildings\Building');
+    }
 }
