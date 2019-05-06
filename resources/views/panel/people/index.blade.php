@@ -27,41 +27,41 @@
 @stop
 
 @section('content')
-
-    <table id="peopleTable" class="table table-bordered table-hover dataTable" role="grid">
-        <thead>
-            <tr role="row">
-                <th>Nome:</th>
-                <th>CPF/CNPJ:</th>
-                <th>Email:</th>
-                <th>Telefone Principal:</th>
-                <th>Ações:</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($people as $person)
-            <tr>
-                <td>{{ $person->name }}</td>
-                <td>
-                    @if (isset($person->cpf)) {{ $person->cpf }} @else {{ $person->cnpj }} @endif
-                </td>
-                <td>{{ $person->email }}</td>
-                <td>{{ $person->phone1 }}</td>
-                <td>
-                    <a href="{{'route'('people.edit',['get'=>$person->id])}}" class="btn btn-success" data-toggle="" data-placement="top" title ="Editar Produto">
-                        <i class="fa fa-fw fa-pencil"></i>
-                    </a>
-                    <a href="#" id="{{ $person->id}}" class="btn btn-danger" data-toggle="modal" data-placement="top" title ="Apagar Produto" data-target="#modalConfirmDelete">
-                        <i class="fa fa-fw fa-close"></i>
-                        {{ Form::open(['action'=>['People\PersonController@destroy', $person->id],'class'=>'hidden','method'=>'delete', 'id'=>'modalConfirmDelete'.$person->id ]) }}
-                        {{ Form::close() }}
-                    </a>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-
-    </table>
+    <div class="">
+        <table id="peopleTable" class="table table-bordered table-hover dataTable" role="grid">
+            <thead>
+                <tr role="row">
+                    <th>Nome:</th>
+                    <th>CPF/CNPJ:</th>
+                    <th>Email:</th>
+                    <th>Telefone Principal:</th>
+                    <th>Ações:</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($people as $person)
+                <tr>
+                    <td>{{ $person->name }}</td>
+                    <td>
+                        @if (isset($person->cpf)) {{ $person->cpf }} @else {{ $person->cnpj }} @endif
+                    </td>
+                    <td>{{ $person->email }}</td>
+                    <td>{{ $person->phone1 }}</td>
+                    <td>
+                        <a href="{{'route'('people.edit',['get'=>$person->id])}}" class="btn btn-success" data-toggle="" data-placement="top" title ="Editar Produto">
+                            <i class="fa fa-fw fa-pencil"></i>
+                        </a>
+                        <a href="#" id="{{ $person->id}}" class="btn btn-danger" data-toggle="modal" data-placement="top" title ="Apagar Produto" data-target="#modalConfirmDelete">
+                            <i class="fa fa-fw fa-close"></i>
+                            {{ Form::open(['action'=>['People\PersonController@destroy', $person->id],'class'=>'hidden','method'=>'delete', 'id'=>'modalConfirmDelete'.$person->id ]) }}
+                            {{ Form::close() }}
+                        </a>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
     {{ $people->links() }}
 @include('layouts.utilities.delete_modal', ['modal'=>'modalConfirmDelete', 'idForm'=>'modalConfirmDelete', 'message'=>'Você tem certeza que deseja excluir este registro?'])
 

@@ -3,11 +3,11 @@
 @section('content_header')
     <section class="content-header">
         <h1>
-            Lista de Construções
+            Obras
         </h1>
         <ol class="breadcrumb breadcrumb-arrow hidden-xs">
             <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
-            <li><a href="#">Pessoas</a></li>
+            <li><a href="#">Obras</a></li>
         </ol>
         <hr style="widht:0; border-color:gray;">
         @if (session('msg'))

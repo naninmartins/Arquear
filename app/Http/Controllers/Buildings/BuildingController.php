@@ -23,8 +23,8 @@ class BuildingController extends Controller
      */
     public function index()
     {
-     $buildings = $this->building->paginate(10);
-     return view('panel.buildings.index',compact('buildings'));
+        $buildings = $this->building->paginate(10);
+        return view('panel.buildings.index',compact('buildings'));
     }
 
     /**
@@ -34,7 +34,7 @@ class BuildingController extends Controller
      */
     public function create()
     {
-        //
+        return view('panel.buildings.create-edit',compact('building'));
     }
 
     /**

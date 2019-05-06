@@ -102,7 +102,9 @@ class Usefuls  {
     setError (element, text = '') {
         let div = element.parentElement;
         div.classList.add("has-error");
-        div.querySelector('div > span').innerHTML = text;
+        let span = div.querySelector('div > span');
+        span.innerHTML = text;
+        span.style.color = "darkred";
     }
 
     removeError (element) {
@@ -165,6 +167,15 @@ class Usefuls  {
     | 'usefulRequired'
     */
 
+    // Set the class name '.form'
+    validateForm (formName) {
+        let form = document.querySelector(formName);
+        form.addEventListener('submit', e=>{
+            e.preventDefault();
+            (this.validateInputs(formName)) ? form.submit() : false;
+        });
+    }
+
     //to use this function add the class name 'usefulRequired' in the desired fields    //
    validateInputs(inputs) {
         let el = document.querySelectorAll(`${inputs} .usefulRequired`); // look : https://stackoverflow.com/questions/11320631/what-s-the-difference-between-the-css-selectors-div-p-and-div-p
@@ -179,7 +190,7 @@ class Usefuls  {
    validate(element) {
         let error = false;
         if(!element.value) {
-            this.setError(element,'Campo obrigatório!');
+            this.setError(element,'Please fill out this field!');
             error = true;
         }
         else {
